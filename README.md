@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PGAGI Personalized Content Dashboard
 
-## Getting Started
+A responsive personalized content dashboard built with Next.js, React, TypeScript, Redux Toolkit, RTK Query, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+The application combines content from multiple sources into a unified feed and allows users to personalize their experience through categories, favorites, search, drag-and-drop ordering, and theme preferences.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+### Personalized Feed
+
+- Technology
+- Sports
+- Finance
+- Entertainment
+- User-selected categories are persisted locally
+- Unified content cards from multiple sources
+
+### Content Sources
+
+- NewsAPI for news content
+- TMDB for recommendations
+- Mock social content API
+- Server-side Next.js API routes protect external API credentials
+
+### Feed Interactions
+
+- Load More pagination
+- Exactly six additional cards per pagination action
+- Drag-and-drop card reordering
+- Favorite/unfavorite content
+- Persistent favorites
+- Responsive content grid
+- Loading and empty states
+- Error handling
+
+### Search
+
+- Search across content
+- Debounced search input
+- Dedicated search results page
+- Search loading and empty states
+
+### Dashboard Pages
+
+- Personalized dashboard
+- Trending
+- Favorites
+- Settings
+- Search
+
+### Settings
+
+- Technology preference
+- Sports preference
+- Finance preference
+- Entertainment preference
+- Light mode
+- Dark mode
+- Preferences persisted using localStorage
+
+### UI / UX
+
+- Responsive layout
+- Sidebar navigation
+- Mobile navigation
+- Sticky header
+- Dark mode
+- Accessible buttons and labels
+- Keyboard focus states
+- Framer Motion animations
+- Responsive content cards
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Redux Toolkit
+- RTK Query
+- Framer Motion
+- Lucide React
+- Vitest
+- React Testing Library
+- Playwright
+
+## Project Structure
+
+```text
+src/
+├── app/
+│   ├── api/
+│   │   ├── news/
+│   │   ├── recommendations/
+│   │   ├── search/
+│   │   └── social/
+│   ├── favorites/
+│   ├── search/
+│   ├── settings/
+│   ├── trending/
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components/
+│   ├── dashboard/
+│   ├── layout/
+│   ├── settings/
+│   └── ui/
+│
+├── data/
+│   └── mockContent.ts
+│
+├── lib/
+│
+├── store/
+│   ├── api/
+│   └── slices/
+│
+├── test/
+│
+└── types/
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
