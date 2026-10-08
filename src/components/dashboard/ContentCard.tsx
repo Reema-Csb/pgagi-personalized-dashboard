@@ -1,34 +1,19 @@
 ﻿"use client";
 
-import {
-  Heart,
-  ExternalLink,
-  Clock,
-  GripVertical,
-} from "lucide-react";
+import { Heart, ExternalLink, Clock, GripVertical } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import type {
-  DragEvent,
-  MouseEvent,
-} from "react";
+import type { DragEvent, MouseEvent } from "react";
 
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
-import {
-  toggleFavorite,
-} from "@/store/slices/favoritesSlice";
+import { toggleFavorite } from "@/store/slices/favoritesSlice";
 
 import type { ContentItem } from "@/types/content";
 
 interface ContentCardProps {
   item: ContentItem;
-  onDragStart?: (
-    event: DragEvent<HTMLDivElement>,
-  ) => void;
+  onDragStart?: (event: DragEvent<HTMLDivElement>) => void;
   isDragging?: boolean;
 }
 
@@ -39,23 +24,15 @@ export default function ContentCard({
 }: ContentCardProps) {
   const dispatch = useAppDispatch();
 
-  const reduxIsFavorite = useAppSelector(
-    (state) =>
-      state.favorites.items.some(
-        (favorite) =>
-          favorite.id === item.id,
-      ),
+  const reduxIsFavorite = useAppSelector((state) =>
+    state.favorites.items.some((favorite) => favorite.id === item.id),
   );
 
-  const [clickedFavorite, setClickedFavorite] =
-    useState<boolean | null>(null);
+  const [clickedFavorite, setClickedFavorite] = useState<boolean | null>(null);
 
-  const isFavorite =
-    clickedFavorite ?? reduxIsFavorite;
+  const isFavorite = clickedFavorite ?? reduxIsFavorite;
 
-  function handleFavorite(
-    event: MouseEvent<HTMLButtonElement>,
-  ) {
+  function handleFavorite(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -66,9 +43,7 @@ export default function ContentCard({
     dispatch(toggleFavorite(item));
   }
 
-  function handleDragStart(
-    event: DragEvent<HTMLDivElement>,
-  ) {
+  function handleDragStart(event: DragEvent<HTMLDivElement>) {
     onDragStart?.(event);
   }
 
@@ -78,9 +53,7 @@ export default function ContentCard({
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
       className={`group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 ${
-        isDragging
-          ? "ring-2 ring-slate-400"
-          : ""
+        isDragging ? "ring-2 ring-slate-400" : ""
       }`}
     >
       <div className="relative aspect-[16/9] overflow-hidden">
@@ -90,6 +63,11 @@ export default function ContentCard({
           alt={item.title}
           className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
           loading="lazy"
+          onError={(event) => {
+            event.currentTarget.onerror = null;
+            event.currentTarget.src =
+              "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80";
+          }}
         />
 
         <div className="absolute left-3 top-3">
@@ -123,22 +101,13 @@ export default function ContentCard({
           onClick={handleFavorite}
           className="absolute right-3 top-3 z-20 rounded-full bg-white/90 p-2.5 text-slate-700 shadow-sm backdrop-blur transition hover:scale-105"
         >
-          <Heart
-            size={18}
-            className={
-              isFavorite
-                ? "fill-current"
-                : ""
-            }
-          />
+          <Heart size={18} className={isFavorite ? "fill-current" : ""} />
         </button>
       </div>
 
       <div className="p-5">
         <div className="mb-3 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-          <span className="font-medium">
-            {item.sourceName}
-          </span>
+          <span className="font-medium">{item.sourceName}</span>
 
           <span>|</span>
 
@@ -159,16 +128,8 @@ export default function ContentCard({
         <div className="mt-5">
           <a
             href={item.url || "#"}
-            target={
-              item.url
-                ? "_blank"
-                : undefined
-            }
-            rel={
-              item.url
-                ? "noreferrer"
-                : undefined
-            }
+            target={item.url ? "_blank" : undefined}
+            rel={item.url ? "noreferrer" : undefined}
             className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:underline dark:text-white"
           >
             Read more
